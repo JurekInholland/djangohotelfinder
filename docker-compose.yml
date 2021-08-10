@@ -2,6 +2,9 @@ version: "3.8"
 services:
   djangoapp:
     build: .
+    environment:
+      - HTTP_AUTH_USER=change_this
+      - HTTP_AUTH_PASS=change_this
     volumes:
       - ./:/app
     ports:
