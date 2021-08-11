@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Delete {{object_type}}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>Are you sure you want to delete the {{object_type}} <span style="font-weight: bold;">{{ object.name }}</span>?</p>
+    <div class="buttons">
+        <input type="submit" class="btn_cancel" value="Delete">
+        <a href="/hoteladmin" class="btn btn_neutral">Cancel</a>
+    </div>
+</form>
+{% endblock %}

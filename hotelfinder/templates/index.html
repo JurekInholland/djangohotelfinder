@@ -27,6 +27,7 @@
         // Don't make a request if there is no query
         if (city_query.value == "") {
             reset_hotels()
+            cached_result = {}
             return;
         }
         let data = new FormData();

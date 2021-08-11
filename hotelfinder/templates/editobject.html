@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{headline}}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form }}
+
+    {{ form.status }}
+
+    <div class="buttons">
+        <input type="submit" class="btn_submit" value="Save">
+        <a href="{% url 'hadmin' %}" class="btn btn_neutral">Cancel</a>
+    </div>
+</form>
+    {% endblock %}
