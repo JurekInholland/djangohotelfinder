@@ -1,1 +1,65 @@
-<h1>index</h1>
+{% extends 'base.html' %}
+{% block content %}
+<div class="search_wrapper">
+    <span class="search_icon"></span>
+    <input type="text" id="city_selector" placeholder="Search City..." list="citylist" oninput="return search_query_change()">
+    <datalist id="citylist">
+        {% for city in city_list %}
+        <option value={{city.name}} i>
+            {% endfor %}
+    </datalist>
+</div>
+<div id="hotel_grid"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<script>
+    let city_query = document.getElementById("city_selector")
+    let hotel_grid = document.getElementById("hotel_grid")
+
+    // Cache post request result to only draw changes
+    let cached_result = {}
+
+    async function search_query_change() {
+        event.preventDefault()
+
+        // Don't make a request if there is no query
+        if (city_query.value == "") {
+            reset_hotels()
+            return;
+        }
+        let data = new FormData();
+        data.append("name", city_query.value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+        res = await axios.post("/hotels/", data)
+
+        if (res.data != cached_result) {
+            reset_hotels()
+            json = JSON.parse(res.data)
+            if (city_query.value != "") {
+                for (const k of json) {
+                    createElement(k.fields)
+                }
+            cached_result = res.data;
+            }
+        }
+    }
+
+    function reset_hotels() {
+        hotel_grid.innerHTML = '';
+    }
+
+    function createElement(hotel_data) {
+        let hotel_element = document.createElement('div')
+        hotel_element.className = 'hotel_element'
+        let hotel_name = document.createElement('h2')
+        let city_name = document.createElement('p')
+        city_name.innerText = hotel_data.city.name
+        hotel_name.innerText = hotel_data.name
+        hotel_element.appendChild(hotel_name)
+        hotel_element.appendChild(city_name)
+        hotel_grid.appendChild(hotel_element)
+    }
+</script>
+{% endblock %}

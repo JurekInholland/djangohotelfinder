@@ -5,6 +5,9 @@ class City(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=120)
 
+    def natural_key(self):
+        return {"code": self.code, "name": self.name}
+
     def __str__(self):
         return self.name
 
