@@ -1,8 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="admin_content">
-    <h2>Admin interface</h2>
+    <h1>Admin interface</h1>
+    <table>
+        <div class="table_header">
+            <p>City managers</p>
+            <a href="{% url 'addmanager' %}" class="add_icon"></a>
+        </div>
+        <tr>
+            <th>Username</th>
+            <th>City</th>
+            <th>Update</th>
+            <th>Remove</th>
+        </tr>
+        {% for manager in managers %}
+        <tr>
+            <td>{{manager.user.username}}</td>
+            <td>{{manager.city.name}}</td>
+            <td><a href="{% url 'editmanager' manager.user_id %}" class="btn">Update</a></td>
+            <td><a href="{% url 'deletemanager' manager.user_id %}" class="btn btn_cancel">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
     <table>
         <div class="table_header">
             <p>Cities</p>
@@ -29,8 +49,9 @@
     <table>
         <div class="table_header">
             <p>Hotels</p>
-            <a href="/addhotel" class="add_icon"></a>
-        </div>        <tr>
+            <a href="{% url 'addhotel' %}" class="add_icon"></a>
+        </div>
+        <tr>
             <th>Code</th>
             <th>Name</th>
             <th>City</th>
@@ -47,6 +68,11 @@
         </tr>
         {% endfor %}
     </table>
-</div>
+
+
+
+        <!-- {% for form in forms %}
+        {{form}}
+        {% endfor %} -->
 
 {% endblock %}

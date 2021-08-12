@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Manage city: {{city.name}}</h1>
+
+<table>
+    <div class="table_header">
+        <p>Hotels</p>
+        <a href="{% url 'manageadd' %}" class="add_icon"></a>
+    </div>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Remove</th>
+    </tr>
+{% for hotel in hotels %}
+<tr>
+    <td>{{hotel.code}}</td>
+    <td>{{hotel.name}}</td>
+    <td><a href="{% url 'manageedit' hotel.code %}" class="btn">Update</a></td>
+    <td><a href="{% url 'managedelete' hotel.code %}" class="btn btn_cancel">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

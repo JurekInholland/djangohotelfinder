@@ -3,6 +3,9 @@
   padding: 0;
   margin: 0;
 }
+li {
+  list-style-type: none;
+}
 h1 {
   margin-bottom: 1rem;
 }
@@ -71,6 +74,12 @@ label {
   margin-top: 0.5rem;
   margin-left: 0.56rem;
 }
+
+.errorlist {
+  color: #da3e38;
+  margin: 0.5rem;
+}
+
 .attention_grabber {
   text-align: center;
   margin-bottom: 1rem;
@@ -117,6 +126,14 @@ label {
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.message {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .buttons {
