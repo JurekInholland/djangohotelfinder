@@ -1,11 +1,23 @@
 version: "3.8"
 services:
   djangoapp:
+    container_name: hotelmanager
     build: .
-    environment:
-      - HTTP_AUTH_USER=change_this
-      - HTTP_AUTH_PASS=change_this
     volumes:
       - ./:/app
     ports:
       - "8000:8000"
+
+  cron:
+    container_name: cron
+    entrypoint: /app/cronjob/cron_entrypoint.sh
+    build: .
+    environment:
+      # Enter http auth credentials here
+      - HTTP_AUTH_USER=change_this
+      - HTTP_AUTH_PASS=change_this
+
+      # Set correct timezone for cron
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./:/app
