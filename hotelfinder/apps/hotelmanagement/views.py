@@ -31,8 +31,9 @@ def login_view(request):
             if nxt:
                 redirect_to = nxt
             return redirect(redirect_to)
+        else:
+            context["feedback"] = "Username or password is incorrect."
 
-    context["feedback"] = "Username or password is incorrect."
     return render(request, "login.html", context)
 
 
