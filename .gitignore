@@ -1,5 +1,5 @@
 docker-compose-dev.yml
-
+staticfiles/
 # Django #
 *.log
 *.pot
